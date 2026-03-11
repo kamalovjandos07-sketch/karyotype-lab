@@ -1,51 +1,65 @@
 # Karyotyping Laboratory Simulator
 
-An interactive 2D virtual laboratory simulator for human karyotyping, designed for medical students learning cytogenetics.
+Интерактивный 2D симулятор цитогенетической лаборатории для обучения кариотипированию.
 
-## Features
+## React SPA (Vite + TailwindCSS)
 
-- **Laboratory Workflow Simulation**: Perform the complete karyotype preparation workflow from sample to analysis
-- **Step-by-Step Guidance**: Enforced biological order with educational feedback
-- **Chromosome Assembly**: Drag-and-drop interface to pair chromosomes (1–22 + sex chromosomes)
-- **Diagnostic Results**: Learn about conditions like 46,XX / 46,XY, Trisomy 21, Turner syndrome, Klinefelter syndrome
-- **Training & Exam Modes**: With or without hints
+### Запуск
 
-## Project Structure
-
-```
-karyotype-lab-simulator/
-├── index.html          # Landing page (mode selection)
-├── simulation.html      # Laboratory workspace
-├── karyotype.html      # Chromosome analysis
-├── styles.css          # Main stylesheet
-├── main.js             # Entry point
-├── simulation.js       # Lab workflow logic
-├── karyotype.js        # Chromosome assembly logic
-├── images/             # Lab equipment placeholders
-├── reagents/           # Reagent placeholders
-└── chromosomes/        # Chromosome placeholders
+```bash
+npm install
+npm run dev
 ```
 
-## How to Run
+Откройте http://localhost:5173
 
-Open `index.html` in a modern web browser. No build step or server required—works as static files.
+### Структура проекта
 
-## Workflow Steps
+```
+src/
+├── config/
+│   ├── assetsConfig.js    # Пути к изображениям — подставьте свои ссылки
+│   └── clinicalCases.js   # Клинические случаи и правильные ответы ISCN
+├── components/            # UI-компоненты (PlaceholderImage, StageOverlay, Layout и др.)
+├── screens/              # CaseSelection
+├── stages/               # Этапы 1–7 симуляции
+├── utils/                # chromosomeSet.js — генерация хромосом
+├── App.jsx
+└── main.jsx
+```
 
-1. **Sample Preparation** – Transfer cells from petri dish to culture flask
-2. **Cell Culture** – Place flask in incubator (cells multiply)
-3. **Colchicine** – Arrest mitosis in metaphase
-4. **Hypotonic Treatment** – Swell cells; use centrifuge
-5. **Fixation** – Preserve cells with fixative
-6. **Staining** – Apply G-banding stain
-7. **Microscope** – Analyze slide and proceed to karyotype assembly
+### Конфигурация изображений
 
-## Technologies
+Все пути к изображениям вынесены в `src/config/assetsConfig.js`. Подставьте туда свои ссылки на:
 
-- HTML5, CSS3, JavaScript (vanilla, no frameworks)
-- Responsive layout
-- CSS animations for lab processes
+- `labBackground`, `bloodTube` — фон и пробирка
+- `reagents.*` — реагенты (ФГА, колхицин, KCl, фиксатор, Гимза)
+- `microscope`, `ocularView`, `metaphasePlate` — микроскоп и снимки
+- `chromosomes.*` — спрайты хромосом
 
-## License
+В коде пока используются серые плейсхолдеры с подписями.
 
-Educational use.
+### Клинические случаи
+
+1. **Норма** — 46,XX или 46,XY
+2. **Синдром Дауна** — 47,XX,+21 или 47,XY,+21
+3. **Синдром Эдвардса** — 47,XX,+18 или 47,XY,+18
+4. **Синдром Патау** — 47,XX,+13 или 47,XY,+13
+
+### Этапы симуляции
+
+1. Забор и культивирование (ФГА, инкубация 37°C)
+2. Блокировка митоза (колхицин)
+3. Гипотоническая обработка и фиксация (KCl, метанол+уксусная кислота)
+4. Приготовление препарата и G-окрашивание
+5. Микроскопирование (вид метафазной пластинки)
+6. Сортировка хромосом (Drag-and-Drop на идиограмму)
+7. Заключение (ввод/проверка формулы ISCN)
+
+На каждом этапе доступны оверлеи с объяснением реагентов.
+
+## Технологии
+
+- React 18, Vite, TailwindCSS
+- @dnd-kit для перетаскивания хромосом
+- Медицинский стиль: белый, светло-синий, серый
