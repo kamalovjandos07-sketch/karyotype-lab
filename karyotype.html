@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromosome Analysis - Karyotype Assembly</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="karyotype-page">
+    <div class="app-container karyotype-container">
+        <header class="karyotype-header">
+            <a href="simulation.html" class="back-link">← Back to Lab</a>
+            <h1>Chromosome Analysis</h1>
+            <p class="instruction">Drag chromosomes to their correct slots to assemble the karyotype.</p>
+        </header>
+
+        <main class="karyotype-workspace">
+            <section class="chromosome-pool" id="chromosome-pool">
+                <h3>Chromosomes (drag to slots)</h3>
+                <div id="chromosome-drag-area" class="drag-area"></div>
+            </section>
+
+            <section class="karyotype-grid" id="karyotype-grid">
+                <h3>Karyotype Slots</h3>
+                <div id="slots-container" class="slots-container"></div>
+            </section>
+        </main>
+
+        <aside class="result-panel" id="result-panel">
+            <h3>Result</h3>
+            <div id="result-content">
+                <p>Complete the karyotype to see the diagnostic result.</p>
+            </div>
+            <button id="check-btn" class="btn-primary">Check Karyotype</button>
+        </aside>
+
+        <div id="result-modal" class="modal-overlay hidden">
+            <div class="modal-content result-modal">
+                <h2 id="result-karyotype">—</h2>
+                <p id="result-diagnosis"></p>
+                <p id="result-explanation"></p>
+                <a href="index.html" class="btn-primary">Start Over</a>
+            </div>
+        </div>
+    </div>
+    <script src="karyotype.js"></script>
+</body>
+</html>

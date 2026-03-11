@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratory Simulation - Karyotyping Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="simulation-page">
+    <div class="app-container simulation-container">
+        <header class="simulation-header">
+            <a href="index.html" class="back-link">← Back</a>
+            <h1>Laboratory Workspace</h1>
+            <div class="step-indicator">
+                <span id="current-step-label">Step 1: Sample Preparation</span>
+                <progress id="step-progress" value="1" max="7"></progress>
+            </div>
+        </header>
+
+        <aside class="instruction-panel">
+            <h3>Instructions</h3>
+            <div id="instruction-content">
+                <p>Place a sample of cells in the culture flask to begin.</p>
+            </div>
+            <div id="hint-area" class="hint-area"></div>
+        </aside>
+
+        <main class="lab-workspace">
+            <div class="lab-table">
+                <!-- Culture flask - Step 1 target -->
+                <div class="lab-item culture-flask" id="culture-flask" data-step="1" title="Culture flask">
+                    <div class="flask-body"></div>
+                    <div class="flask-neck"></div>
+                    <span class="item-label">Culture Flask</span>
+                </div>
+
+                <!-- Petri dish - sample source -->
+                <div class="lab-item petri-dish" id="petri-dish" data-step="1" title="Petri dish with sample">
+                    <div class="dish-lid"></div>
+                    <div class="dish-base"></div>
+                    <span class="item-label">Petri Dish (Sample)</span>
+                </div>
+
+                <!-- Pipette -->
+                <div class="lab-item pipette" id="pipette" data-step="1" title="Pipette">
+                    <div class="pipette-body"></div>
+                    <span class="item-label">Pipette</span>
+                </div>
+
+                <!-- Reagent bottles -->
+                <div class="reagent-shelf">
+                    <div class="lab-item reagent-bottle colchicine" id="reagent-colchicine" data-reagent="colchicine" data-step="3" title="Colchicine">
+                        <div class="bottle-body"></div>
+                        <span class="item-label">Colchicine</span>
+                    </div>
+                    <div class="lab-item reagent-bottle hypotonic" id="reagent-hypotonic" data-reagent="hypotonic" data-step="4" title="Hypotonic solution">
+                        <div class="bottle-body"></div>
+                        <span class="item-label">Hypotonic</span>
+                    </div>
+                    <div class="lab-item reagent-bottle fixative" id="reagent-fixative" data-reagent="fixative" data-step="5" title="Fixative">
+                        <div class="bottle-body"></div>
+                        <span class="item-label">Fixative</span>
+                    </div>
+                    <div class="lab-item reagent-bottle stain" id="reagent-stain" data-reagent="stain" data-step="6" title="G-band stain">
+                        <div class="bottle-body"></div>
+                        <span class="item-label">G-band Stain</span>
+                    </div>
+                </div>
+
+                <!-- Centrifuge -->
+                <div class="lab-item centrifuge" id="centrifuge" data-step="4" title="Centrifuge">
+                    <div class="centrifuge-drum"></div>
+                    <span class="item-label">Centrifuge</span>
+                </div>
+
+                <!-- Incubator -->
+                <div class="lab-item incubator" id="incubator" data-step="2" title="Incubator">
+                    <div class="incubator-door"></div>
+                    <span class="item-label">Incubator</span>
+                </div>
+
+                <!-- Microscope - Step 7, leads to karyotype -->
+                <div class="lab-item microscope" id="microscope" data-step="7" title="Microscope">
+                    <div class="microscope-base"></div>
+                    <div class="microscope-arm"></div>
+                    <div class="microscope-eyepiece"></div>
+                    <span class="item-label">Microscope</span>
+                </div>
+            </div>
+        </main>
+
+        <div id="modal-overlay" class="modal-overlay hidden">
+            <div class="modal-content">
+                <h3 id="modal-title">Step Complete</h3>
+                <p id="modal-text"></p>
+                <button id="modal-close" class="btn-primary">Continue</button>
+            </div>
+        </div>
+
+        <div id="error-overlay" class="modal-overlay error-overlay hidden">
+            <div class="modal-content error-modal">
+                <h3>⚠️ Error</h3>
+                <p id="error-text"></p>
+                <button id="error-close" class="btn-primary">Try Again</button>
+            </div>
+        </div>
+    </div>
+    <script src="simulation.js"></script>
+</body>
+</html>

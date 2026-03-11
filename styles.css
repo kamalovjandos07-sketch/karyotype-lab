@@ -1,0 +1,685 @@
+/**
+ * Karyotyping Lab Simulator - Main Stylesheet
+ * Educational cytogenetics laboratory styling
+ */
+
+/* ===== CSS Variables ===== */
+:root {
+    --color-bg: #0f1419;
+    --color-surface: #1a2332;
+    --color-surface-light: #243044;
+    --color-accent: #00c896;
+    --color-accent-dim: #00a67e;
+    --color-text: #e8ecf1;
+    --color-text-muted: #8b9aaf;
+    --color-error: #e74c3c;
+    --color-warning: #f39c12;
+    --font-display: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: var(--font-display);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+/* ===== App Container ===== */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Landing Page ===== */
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-surface-light);
+}
+.main-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0 0 0.5rem;
+    background: linear-gradient(135deg, var(--color-accent), #4dd4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.landing-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+.intro-section {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.mode-selection {
+    margin-bottom: 2rem;
+}
+.mode-selection h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+.mode-cards {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.mode-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.mode-card:hover {
+    border-color: var(--color-surface-light);
+    transform: translateY(-2px);
+}
+.mode-card.selected {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+}
+.mode-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+.mode-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+}
+.mode-card p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+}
+.mode-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-surface-light);
+    border-radius: 6px;
+    color: var(--color-text-muted);
+}
+
+.start-section {
+    text-align: center;
+    margin: 2rem 0;
+}
+.btn-primary {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-primary:hover:not(:disabled) {
+    background: var(--color-accent-dim);
+}
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.workflow-preview {
+    max-width: 500px;
+    margin: 2rem auto 0;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+}
+.workflow-preview h3 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+}
+.workflow-steps-preview {
+    padding-left: 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+.workflow-steps-preview li {
+    margin-bottom: 0.35rem;
+}
+
+.main-footer {
+    padding: 1.5rem 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--color-surface-light);
+}
+
+/* ===== Simulation Page ===== */
+.simulation-page {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #0a0f14 100%);
+}
+.simulation-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "instructions workspace";
+    gap: 1rem;
+    min-height: 100vh;
+}
+
+.simulation-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.back-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.back-link:hover { text-decoration: underline; }
+.simulation-header h1 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.35rem;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.step-indicator progress {
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-surface-light);
+}
+.step-indicator progress::-webkit-progress-bar { background: var(--color-surface-light); border-radius: 3px; }
+.step-indicator progress::-webkit-progress-value { background: var(--color-accent); border-radius: 3px; }
+#current-step-label { font-size: 0.85rem; color: var(--color-text-muted); }
+
+.instruction-panel {
+    grid-area: instructions;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    height: fit-content;
+    position: sticky;
+    top: 1rem;
+}
+.instruction-panel h3 { margin: 0 0 0.75rem; font-size: 1rem; }
+#instruction-content p { margin: 0; color: var(--color-text-muted); font-size: 0.9rem; }
+.hint-area { margin-top: 1rem; }
+.hint {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    background: rgba(0, 200, 150, 0.1);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--color-text-muted);
+}
+.feedback {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    animation: fadeIn 0.3s ease;
+}
+
+/* ===== Lab Workspace ===== */
+.lab-workspace {
+    grid-area: workspace;
+    background: linear-gradient(180deg, #2a3a4a 0%, #1e2a36 100%);
+    border-radius: var(--radius);
+    padding: 2rem;
+    min-height: 400px;
+    position: relative;
+}
+
+.lab-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 2rem;
+    align-items: end;
+    justify-items: center;
+    min-height: 350px;
+}
+
+.lab-item {
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.lab-item:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+.lab-item:active { transform: scale(0.98); }
+.item-label {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Lab equipment CSS shapes */
+.culture-flask {
+    width: 50px;
+    height: 80px;
+}
+.flask-body {
+    width: 45px;
+    height: 55px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 0 0 8px 8px;
+    transition: background 0.5s;
+}
+.culture-flask.has-sample .flask-body { background: linear-gradient(135deg, rgba(0,200,150,0.4), rgba(0,200,150,0.1)); }
+.flask-neck {
+    width: 15px;
+    height: 25px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 4px 4px 0 0;
+}
+
+.petri-dish {
+    width: 60px;
+    height: 60px;
+}
+.dish-base {
+    width: 55px;
+    height: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+.dish-lid {
+    width: 50px;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    margin-bottom: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.pipette {
+    width: 20px;
+    height: 100px;
+}
+.pipette-body {
+    width: 12px;
+    height: 90px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #888, #aaa);
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+.pipette.animating .pipette-body {
+    animation: pipette-absorb 1s ease;
+}
+@keyframes pipette-absorb {
+    0% { transform: scaleY(1); }
+    30% { transform: scaleY(0.7); }
+    60% { transform: scaleY(1.1); }
+    100% { transform: scaleY(1); }
+}
+.reagent-bottle.animating .bottle-body {
+    animation: bottle-tip 1s ease;
+}
+@keyframes bottle-tip {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-15deg); }
+}
+
+.reagent-shelf {
+    display: flex;
+    gap: 0.5rem;
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+}
+.reagent-bottle {
+    width: 40px;
+    height: 55px;
+}
+.bottle-body {
+    width: 35px;
+    height: 45px;
+    margin: 0 auto;
+    border-radius: 4px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+.reagent-bottle.colchicine .bottle-body { background: linear-gradient(135deg, #4a6fa5, #2e4a6f); }
+.reagent-bottle.hypotonic .bottle-body { background: linear-gradient(135deg, #5fa8d3, #3d7a9e); }
+.reagent-bottle.fixative .bottle-body { background: linear-gradient(135deg, #8b7355, #5c4a38); }
+.reagent-bottle.stain .bottle-body { background: linear-gradient(135deg, #6b5b95, #4a3d6b); }
+
+.centrifuge {
+    width: 70px;
+    height: 60px;
+}
+.centrifuge-drum {
+    width: 60px;
+    height: 50px;
+    background: #555;
+    border-radius: 8px;
+    border: 3px solid #666;
+}
+
+.incubator {
+    width: 80px;
+    height: 70px;
+}
+.incubator-door {
+    width: 70px;
+    height: 60px;
+    background: #3a3a3a;
+    border: 3px solid #555;
+    border-radius: 4px;
+}
+.incubator.active .incubator-door {
+    background: linear-gradient(135deg, rgba(255,180,0,0.2), rgba(255,100,0,0.1));
+    animation: incubator-glow 1.5s ease infinite;
+}
+
+.microscope {
+    width: 70px;
+    height: 80px;
+}
+.microscope-base {
+    width: 50px;
+    height: 15px;
+    background: #444;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+.microscope-arm {
+    width: 8px;
+    height: 40px;
+    background: #666;
+    margin: 0 auto -5px;
+}
+.microscope-eyepiece {
+    width: 25px;
+    height: 20px;
+    background: #555;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+
+/* ===== Animations ===== */
+@keyframes incubator-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,180,0,0.3); }
+    50% { box-shadow: 0 0 20px rgba(255,180,0,0.5); }
+}
+
+.lab-item.animating.anim-culture-grow .flask-body,
+.culture-flask.animating .flask-body {
+    animation: cell-division 2s ease;
+}
+@keyframes cell-division {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.centrifuge.animating .centrifuge-drum {
+    animation: centrifuge-spin 1.5s linear;
+}
+@keyframes centrifuge-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.microscope.animating .microscope-eyepiece {
+    animation: microscope-zoom 1.5s ease;
+}
+@keyframes microscope-zoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+.culture-flask.animating.anim-reagent-added .flask-body {
+    animation: stain-pour 1s ease;
+}
+@keyframes stain-pour {
+    0% { background: linear-gradient(135deg, rgba(0,200,150,0.4), rgba(0,200,150,0.1)); }
+    50% { background: linear-gradient(135deg, rgba(107,91,149,0.5), rgba(0,200,150,0.2)); }
+    100% { background: linear-gradient(135deg, rgba(107,91,149,0.4), rgba(0,200,150,0.15)); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== Modals ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.modal-content {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    max-width: 420px;
+    width: 90%;
+    box-shadow: var(--shadow);
+}
+.modal-content h3 { margin: 0 0 1rem; }
+.modal-content p { margin: 0 0 1rem; color: var(--color-text-muted); }
+.error-overlay .modal-content,
+.error-modal {
+    border: 2px solid var(--color-error);
+}
+.error-modal h3 { color: var(--color-error); }
+
+/* ===== Karyotype Page ===== */
+.karyotype-page { background: var(--color-bg); }
+.karyotype-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "workspace result";
+    gap: 1rem;
+}
+
+.karyotype-header {
+    grid-area: header;
+}
+.karyotype-header .back-link { color: var(--color-accent); text-decoration: none; }
+.karyotype-header h1 { margin: 0 0 0.25rem; }
+.karyotype-header .instruction { color: var(--color-text-muted); font-size: 0.9rem; margin: 0; }
+
+.karyotype-workspace {
+    grid-area: workspace;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chromosome-pool {
+    background: var(--color-surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+}
+.chromosome-pool h3,
+.karyotype-grid h3 { margin: 0 0 0.75rem; font-size: 1rem; }
+
+.drag-area {
+    min-height: 180px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed var(--color-surface-light);
+    border-radius: var(--radius);
+    padding: 1rem;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+}
+.drag-area.drag-over {
+    background: rgba(0, 200, 150, 0.1);
+    border-color: var(--color-accent);
+}
+
+/* Chromosome items */
+.chromosome-item {
+    position: absolute;
+    width: calc(30px * var(--chr-size, 1));
+    height: 18px;
+    background: linear-gradient(90deg,
+        #4a6fa5 0%, #5a7fb5 15%, #6b8fc5 30%, #5a7fb5 45%, #4a6fa5 60%, #3a5f95 75%, #4a6fa5 100%);
+    border-radius: 2px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: rgba(255,255,255,0.9);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    transition: box-shadow 0.2s;
+}
+.chromosome-item:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+.chromosome-item.dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    z-index: 100;
+}
+.chromosome-item .chr-label { pointer-events: none; }
+
+.slots-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.75rem;
+}
+.karyotype-slot {
+    background: var(--color-surface);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--color-surface-light);
+}
+.karyotype-slot .slot-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.35rem;
+}
+.slot-content {
+    min-height: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 0.35rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    transition: background 0.2s, border-color 0.2s;
+}
+.slot-content.drag-over {
+    background: rgba(0, 200, 150, 0.15);
+    border: 2px dashed var(--color-accent);
+}
+.slot-content .chromosome-item {
+    position: static;
+    width: calc(24px * var(--chr-size, 1));
+    height: 14px;
+}
+.slot-error {
+    font-size: 0.7rem;
+    color: var(--color-error);
+    margin-top: 0.25rem;
+}
+
+.result-panel {
+    grid-area: result;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    height: fit-content;
+    position: sticky;
+    top: 1rem;
+}
+.result-panel h3 { margin: 0 0 0.75rem; }
+#result-content { margin-bottom: 1rem; font-size: 0.9rem; color: var(--color-text-muted); }
+#result-content .error { color: var(--color-error); }
+
+.result-modal h2 {
+    font-size: 1.75rem;
+    color: var(--color-accent);
+    margin: 0 0 0.5rem;
+}
+.result-modal .btn-primary {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .simulation-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "instructions"
+            "workspace";
+    }
+    .instruction-panel { position: static; }
+    .lab-table { grid-template-columns: repeat(2, 1fr); }
+
+    .karyotype-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "workspace"
+            "result";
+    }
+    .result-panel { position: static; }
+}
+
+@media (max-width: 500px) {
+    .app-container { padding: 1rem; }
+    .mode-cards { flex-direction: column; }
+    .lab-table { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}

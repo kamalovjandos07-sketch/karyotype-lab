@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karyotyping Lab Simulator - Medical Cytogenetics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <h1>🧬 Karyotyping Laboratory Simulator</h1>
+            <p class="subtitle">Interactive cytogenetics training for medical students</p>
+        </header>
+
+        <main class="landing-content">
+            <section class="intro-section">
+                <p>Welcome to the virtual karyotyping laboratory. In this simulator, you will perform the complete workflow of preparing chromosomes for karyotype analysis—from sample collection to diagnostic interpretation.</p>
+            </section>
+
+            <section class="mode-selection">
+                <h2>Select Learning Mode</h2>
+                <div class="mode-cards">
+                    <div class="mode-card" data-mode="training">
+                        <div class="mode-icon">📚</div>
+                        <h3>Training Mode</h3>
+                        <p>Step-by-step guidance with hints and educational explanations at each stage.</p>
+                        <span class="mode-badge">Recommended for beginners</span>
+                    </div>
+                    <div class="mode-card" data-mode="exam">
+                        <div class="mode-icon">📝</div>
+                        <h3>Exam Mode</h3>
+                        <p>No hints. Perform the procedure independently. Errors will be reported.</p>
+                        <span class="mode-badge">Test your skills</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="start-section">
+                <button id="start-btn" class="btn-primary" disabled>
+                    Select a mode to begin
+                </button>
+            </section>
+
+            <section class="workflow-preview">
+                <h3>What you'll learn</h3>
+                <ol class="workflow-steps-preview">
+                    <li>Sample preparation & cell culture</li>
+                    <li>Colchicine treatment (metaphase arrest)</li>
+                    <li>Hypotonic treatment & fixation</li>
+                    <li>G-banding staining</li>
+                    <li>Microscope analysis</li>
+                    <li>Chromosome pairing & karyotype interpretation</li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <p>Educational tool for cytogenetics • Karyotype Lab Simulator v1.0</p>
+        </footer>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
